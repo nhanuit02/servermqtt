@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" href="" type="image/x-icon"/>
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>ESP32</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- progress barstle -->
+  <link rel="stylesheet" href="css/css-circular-prog-bar.css">
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,600&display=swap" rel="stylesheet">
+  <!-- font wesome stylesheet -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+
+
+  <link rel="stylesheet" href="css/css-circular-prog-bar.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js" integrity="sha512-tc5xpAPaQDl/Uxd7ZVbV66v94Lys0IefMJSdlABPuzyCv0IXmr9TkqEQvZiWKRoXMSlP5YPRwpq2a+v5q2uzMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.js" integrity="sha512-yX4jaiU9Ai9dzaimFoTq+tQYOrAMNP+EWiiUVsru3ypsAi76c0zCPBfxKagLkKjC4ZeLMEQTa7aE7CtjTmlgDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/mqtt.js"></script>
+  <script>
+    // Kết nối tới máy chủ WebSocket
+    const socket = new WebSocket('ws://localhost:8000');
+    //const mqttClient = new mqttClient('mqtt://mqtt.flespi.io:1883');
+    // Xử lý sự kiện khi kết nối được thiết lập
+    socket.onopen = function(event) {
+      console.log('Connected to server');
+    };
+
+    // Xử lý sự kiện nhận thông điệp từ máy chủ
+    socket.onmessage = function(event) {
+      console.log('Received message:', event.data);
+    };
+
+    // Gửi chuỗi đến máy chủ khi nhấn nút "Send"
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      socket.send(message);
+      messageInput.value = '';
+    }
+    function sendMessagechangeName() {
+      const messageInput1 = document.getElementById('messageChangeName');
+      const message1 = messageInput1.value;
+      socket.send(message1);
+      messageInput1.value = '';
+    }
+    //showtag
+    function toggleDropdown() {
+    var tagList = document.getElementById("tagList");
+    tagList.classList.toggle("show");
+    }
+
+    var headings = document.getElementsByTagName("h3");
+    var tagList = document.getElementById("tagList");
+
+    for (var i = 0; i < headings.length; i++) {
+      var listItem = document.createElement("a");
+      listItem.textContent = headings[i].textContent;
+      listItem.href = "#";
+      listItem.onclick = showContent;
+      tagList.appendChild(listItem);
+    }
+
+    function showContent(event) {
+      var headingText = event.target.textContent.trim().toLowerCase().replace(/\s/g, "");
+      var content = document.getElementById(headingText).nextElementSibling;
+      content.classList.toggle("show");
+    }
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body>
+  <div class="top_container">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="index.html">
+            <span>
+              
+            </span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!--<div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
+              <ul class="navbar-nav  ">
+                <li class="nav-item active">
+                  <a class="nav-link" href="index.html"> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="about.html"> About </a>
+                </li>
+
+                <li class="nav-item ">
+                  <a class="nav-link" href="admission.html"> Admission </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="why.html"> Why Us </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact Us</a>
+                </li>
+
+              </ul>
+            </div>-->
+        </nav>
+      </div>
+    </header>
+    <section class="hero_section ">
+      <div class="hero-container container">
+        <div class="hero_detail-box">
+          <h1>
+            Đồ án 
+            hệ thống 
+            nhúng không dây
+          </h1>
+          <p>
+
+          </p>
+          <!--<div class="hero_btn-continer">
+            <a href="" class="call_to-btn btn_white-border">
+              Read More
+            </a>
+          </div>-->
+        </div>
+        <div class="hero_img-container">
+          <div>
+            <!--<img src="images/hero.png" alt="" class="img-fluid">-->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- end header section -->
+
+  <div class="common_style">
+
+    <!-- about section -->
+    <section class="about_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="about_img-container">
+              <img src="images/temp.png" alt="">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="about_detail-box">
+              <h3 id = "heading1">
+                Temperature Chart
+              </h3>
+            
+              <canvas id="temperatureChart"height: 250px; width: 100%;></canvas>
+              <script>
+                //Temperature
+
+            
+                //nhan du lieu
+                </script>
+              
+              <!--<div class="">
+                <a href="" class="call_to-btn btn_white-border">
+                  Read More
+                </a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- end about section -->
+
+    <!-- admission section -->
+    <section class="admission_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="admission_detail-box">
+              <h3 id="heading2">
+                Humidity Chart
+              </h3>
+
+              <canvas id="humidityChart"height: 250px; width: 100%;></canvas>
+              <div class="">
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="admission_img-container">
+              <img src="images/humidity.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- end admission section -->
+
+    <!-- why section -->
+    <section class="why_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="why_img-container">
+              <img src="images/gas.png" alt="">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="why_detail-box">
+              <h3 id="heading3">
+                  Gas Chart
+              </h3>
+              <p>how to use?</p>
+              <canvas id="gasChart"height: 250px; width: 100%;></canvas>
+              <!--<div class="">
+                <a href="" class="call_to-btn btn_white-border">
+                  Read More
+                </a>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- end why section -->
+
+    <!-- determine section -->
+    <section class="determine_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="determine_detail-box">
+              <h3>
+                SendCommand
+              </h3>
+
+              <input type="text" id="messageInput" placeholder="Endter a message">
+              <div class="" >
+                <a  class="call_to-btn btn_white-border" onclick="sendMessage()">
+                  Send
+                </a>
+              </div>
+              <input type="text" id="messageChangeName" placeholder="Enter new name">
+              <div class="">
+                <a class="call_to-btn btn_white-border" onclick="sendMessagechangeName()">
+                  Send New Name
+                </a>
+              </div>
+              <div class="dropdown">
+                <button onclick="toggleDropdown()" class="dropbtn">Danh sách các tiêu đề</button>
+                <div id="tagList" class="dropdown-content">
+                  <!-- Nội dung danh sách sẽ được cập nhật bằng JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="determine_img-container">
+              <img src="images/determine.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- end determine section -->
+
+  </div>
+
+
+  <!-- client section -->
+  <section class="client_section layout_padding">
+    <h2 class="">
+      Members
+    </h2>
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <div class="row">
+                      <div class="col-md-3">
+                        <div class="client_img-box">
+                          <img src="" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="client_detail-box">
+                          <h5>
+
+                          </h5>
+                          <p>
+
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="row">
+                      <div class="col-md-3">
+                        <div class="client_img-box">
+                          <img src="" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="client_detail-box">
+                          <h5>
+
+                          </h5>
+                          <p>
+
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                  <div class="row">
+                      <div class="col-md-3">
+                        <div class="client_img-box">
+                          <img src="" alt="">
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="client_detail-box">
+                          <h5>
+
+                          </h5>
+                          <p>
+
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+     
+    </div>
+  </section>
+
+
+  <!-- end client section -->
+
+
+    <!-- contact section 
+
+    <section class="contact_section ">
+
+        <div class="container">
+         
+          <div class="row">
+            <div class="col-md-6">
+              <div class="d-flex justify-content-center d-md-block">
+                <h2>
+                  Contact Us
+                </h2>
+              </div>
+              <form action="">
+                <div class="contact_form-container">
+                  <div>
+                    <div>
+                      <input type="text" placeholder="Name">
+                    </div>
+                    <div>
+                      <input type="email" placeholder="Email">
+                    </div>
+                    <div>
+                      <input type="text" placeholder="Phone Number">
+                    </div>
+                    <div class="mt-5">
+                      <input type="text" placeholder="Message">
+                    </div>
+                    <div class="mt-5">
+                      <button type="submit">
+                        send
+                      </button>
+                    </div>
+                  </div>
+    
+                </div>
+    
+              </form>
+            </div>
+            <div class="col-md-6">
+              <div class="contact_img-box">
+                <img src="images/students.jpg" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>-->
+
+      <!-- end contact section 
+
+      <section class="info_section layout_padding-top">
+        <div class="info_logo-box">
+          <h2>
+              ESP32
+          </h2>
+        </div>
+          <div class="container layout_padding2">
+            <div class="row">
+              <div class="col-md-3">
+                <h5>
+                    About Us                                                                             
+                </h5>
+               <p>
+                UIT
+               </p>
+              </div>
+              <div class="col-md-3">
+                <h5>
+                    Useful Link 
+                </h5>
+                <ul>
+                  <li>
+                    <a href="">
+                        Video games
+                    </a>
+                  </li>
+                  <li>
+                   <a href="">
+                      Remote control
+                   </a>
+                  </li>
+                  <li>
+                    <a href="">
+                        3d controller
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <h5>
+                    Contact Us
+                </h5>
+                <p>
+                  nothing
+                </p>
+              </div>
+              <div class="col-md-3">
+           
+                <div class="subscribe_container">
+                  <h5>
+                      Newsletter
+                  </h5>
+                  <div class="form_container">
+                    <form action="">
+                      <input type="email" placeholder="Enter your email">
+                      <button type="submit">
+                        Subscribe
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="container">
+              <div class="social_container">
+                 
+                  <div class="social-box">
+                    <a href="https://www.facebook.com/Thanh.Nhan.428204">
+                      <img src="images/fb.png" alt="">
+                    </a>
+      
+                    <a href="">
+                      <img src="images/twitter.png" alt="">
+                    </a>
+                    <a href="">
+                      <img src="images/linkedin.png" alt="">
+                    </a>
+                    <a href="">
+                      <img src="images/instagram.png" alt="">
+                    </a>
+                  </div>
+                </div>
+          </div>
+        </section>-->
+
+  <!-- footer section 
+  <section class="container-fluid footer_section">
+    <p>
+      Copyright &copy; 2019
+      <a href="https://html.design/"></a>
+    </p>
+  </section>
+  
+  footer section 
+
+  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>-->
+  
+  <script>
+  const max_nodes = 10;
+  //Temperature
+  const ctx = document.getElementById('temperatureChart').getContext('2d');
+  const temperatureChart = new Chart(ctx, {
+    type :'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'temperature',
+        data: [0],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true
+        }
+      }
+    }
+  });
+  //Humidity
+  const ctx1 = document.getElementById('humidityChart').getContext('2d');
+  const humidityChart = new Chart(ctx1, {
+    type :'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'humidity',
+        data: [0],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true
+        }
+      }
+    }
+  });
+  //Gas
+  const ctx2 = document.getElementById('gasChart').getContext('2d');
+  const gasChart = new Chart(ctx2, {
+    type :'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'gas',
+        data: [0],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true
+        }
+      }
+    }
+  });
+
+    /*socket.addEventListener('message', (event) => {
+    const datatest = {
+      "node":[
+        {
+          "teamperature":30, 
+          "humidity":30, 
+          "gas":10,
+          "error":0
+        },
+        {
+          "teamperature":30, 
+          "humidity":30, 
+          "gas":10,
+          "error":0
+        },
+        {
+          "teamperature":20, 
+          "humidity":10, 
+          "gas":20,
+          "error":0
+        }
+      ]   
+    }
+    //const jsonData = JSON.parse(event.data);
+    const jsonData = JSON.parse(datatest);
+    const node = jsonData.node;
+    const temperature = node[i].temperature;
+    const humidity = node[i].humidity;
+    const gas = node[i].gas;*/
+    mqttClient.on('message', (topic, message) => {
+    const jsonData = JSON.parse(message.toString());
+    const temperature = jsonData.temperature;
+    const humidity = jsonData.humidity;
+    const gas = jsonData.gas;
+
+    const time = new Date().toLocaleTimeString();
+    temperatureChart.data.labels.push(time);
+    temperatureChart.data.datasets[0].data.push(temperature);
+    if (temperatureChart.data.labels.length > max_nodes) {
+      temperatureChart.data.labels.shift();
+      temperatureChart.data.datasets[0].data.shift();
+    }
+    temperatureChart.update();
+    console.log(temperature);
+
+    humidityChart.data.labels.push(time);
+    humidityChart.data.datasets[0].data.push(humidity);
+    if (humidityChart.data.labels.length > max_nodes) {
+      humidityChart.data.labels.shift();
+      humidityChart.data.datasets[0].data.shift();
+    }
+    humidityChart.update();
+    console.log(humidity);
+
+    gasChart.data.labels.push(time);
+    gasChart.data.datasets[0].data.push(gas);
+    if (gasChart.data.labels.length > max_nodes) {
+      gasChart.data.labels.shift();
+      gasChart.data.datasets[0].data.shift();
+    }
+    gasChart.update();
+    console.log(gas);
+  })
+
+  </script>
+
+
+</body>
+
+</html>
