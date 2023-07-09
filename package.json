@@ -6,9 +6,16 @@
   "license": "MIT",
   "dependencies": {
     "chart.js": "^4.3.0",
+    "chartjs": "^0.3.24",
     "express": "^4.18.2",
     "flespi-io-js": "https://github.com/flespi-software/flespi-io-js.git",
+    "js": "^0.1.0",
+    "min": "^0.2.2",
     "mqtt": "^4.3.7",
+    "react": "^18.2.0",
+    "react-native-mqtt": "^0.1.0-beta4",
+    "react-native-tcp-socket": "^6.0.6",
+    "react-native-websocket": "^1.0.2",
     "ws": "^8.13.0"
   }
 }

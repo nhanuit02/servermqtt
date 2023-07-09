@@ -1,5 +1,3 @@
-
-
 const mqttClient = mqtt.connect('mqtt://mqtt.flespi.io:1883', {
   username: 'eXUeRHMZWmaE7CqW9nj2Peio1iKtDrNFdyHS3jGNtGgq6wa6KjYpn5CdbcuCs87v', // Replace with your Flespi username
   //password: '', // Replace with your Flespi password
@@ -24,83 +22,7 @@ function subscribeTopics() {
 }
 const max_nodes = 10;
 //Temperature
-const ctx = document.getElementById('temperatureChart').getContext('2d');
-const temperatureChart = new Chart(ctx, {
-  type :'line',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'temperature',
-      data: [0],
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        display: true
-      },
-      y: {
-        display: true
-      }
-    }
-  }
-});
-//Humidity
-const ctx1 = document.getElementById('humidityChart').getContext('2d');
-const humidityChart = new Chart(ctx1, {
-  type :'line',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'humidity',
-      data: [0],
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        display: true
-      },
-      y: {
-        display: true
-      }
-    }
-  }
-});
-//Gas
-const ctx2 = document.getElementById('gasChart').getContext('2d');
-const gasChart = new Chart(ctx2, {
-  type :'line',
-  data: {
-    labels: [],
-    datasets: [{
-      label: 'gas',
-      data: [0],
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 1
-    }]
-  },
-  options: {
-    responsive: true,
-    scales: {
-      x: {
-        display: true
-      },
-      y: {
-        display: true
-      }
-    }
-  }
-});
+
 
   /*socket.addEventListener('message', (event) => {
   const datatest = {
