@@ -18,7 +18,6 @@
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
   <!-- progress barstle -->
-  <link rel="stylesheet" href="css/css-circular-prog-bar.css">
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,600&display=swap" rel="stylesheet">
   <!-- font wesome stylesheet -->
@@ -29,8 +28,7 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 
-  <link rel="stylesheet" href="css/css-circular-prog-bar.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js" integrity="sha512-tc5xpAPaQDl/Uxd7ZVbV66v94Lys0IefMJSdlABPuzyCv0IXmr9TkqEQvZiWKRoXMSlP5YPRwpq2a+v5q2uzMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.js" integrity="sha512-yX4jaiU9Ai9dzaimFoTq+tQYOrAMNP+EWiiUVsru3ypsAi76c0zCPBfxKagLkKjC4ZeLMEQTa7aE7CtjTmlgDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js" integrity="sha512-tc5xpAPaQDl/Uxd7ZVbV66v94Lys0IefMJSdlABPuzyCv0IXmr9TkqEQvZiWKRoXMSlP5YPRwpq2a+v5q2uzMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="/js/mqtt.js"></script>
   <script>
     // Kết nối tới máy chủ WebSocket
@@ -278,12 +276,21 @@
                   Send New Name
                 </a>
               </div>
-              <div class="dropdown">
-                <button onclick="toggleDropdown()" class="dropbtn">Danh sách các tiêu đề</button>
-                <div id="tagList" class="dropdown-content">
-                  <!-- Nội dung danh sách sẽ được cập nhật bằng JavaScript -->
-                </div>
-              </div>
+              <form action="#">
+                <label for="lang">Node List</label>
+                <select name="languages" id="lang">
+                  <option value="select">Select a Node</option>
+                  <option value="javascript">JavaScript</option>
+                  <option value="php">PHP</option>
+                  <option value="java">Java</option>
+                  <option value="golang">Golang</option>
+                  <option value="python">Python</option>
+                  <option value="c#">C#</option>
+                  <option value="C++">C++</option>
+                  <option value="erlang">Erlang</option>
+                </select>
+                <input type="submit" value="Submit" />
+              </form>
             </div>
           </div>
           <div class="col-md-6">
@@ -324,7 +331,7 @@
                       <div class="col-md-9">
                         <div class="client_detail-box">
                           <h5>
-
+                            Phuc gay
                           </h5>
                           <p>
 
@@ -342,7 +349,7 @@
                       <div class="col-md-9">
                         <div class="client_detail-box">
                           <h5>
-
+                            Nhan nè
                           </h5>
                           <p>
 
@@ -377,305 +384,14 @@
   </section>
 
 
-  <!-- end client section -->
 
-
-    <!-- contact section 
-
-    <section class="contact_section ">
-
-        <div class="container">
-         
-          <div class="row">
-            <div class="col-md-6">
-              <div class="d-flex justify-content-center d-md-block">
-                <h2>
-                  Contact Us
-                </h2>
-              </div>
-              <form action="">
-                <div class="contact_form-container">
-                  <div>
-                    <div>
-                      <input type="text" placeholder="Name">
-                    </div>
-                    <div>
-                      <input type="email" placeholder="Email">
-                    </div>
-                    <div>
-                      <input type="text" placeholder="Phone Number">
-                    </div>
-                    <div class="mt-5">
-                      <input type="text" placeholder="Message">
-                    </div>
-                    <div class="mt-5">
-                      <button type="submit">
-                        send
-                      </button>
-                    </div>
-                  </div>
-    
-                </div>
-    
-              </form>
-            </div>
-            <div class="col-md-6">
-              <div class="contact_img-box">
-                <img src="images/students.jpg" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>-->
-
-      <!-- end contact section 
-
-      <section class="info_section layout_padding-top">
-        <div class="info_logo-box">
-          <h2>
-              ESP32
-          </h2>
-        </div>
-          <div class="container layout_padding2">
-            <div class="row">
-              <div class="col-md-3">
-                <h5>
-                    About Us                                                                             
-                </h5>
-               <p>
-                UIT
-               </p>
-              </div>
-              <div class="col-md-3">
-                <h5>
-                    Useful Link 
-                </h5>
-                <ul>
-                  <li>
-                    <a href="">
-                        Video games
-                    </a>
-                  </li>
-                  <li>
-                   <a href="">
-                      Remote control
-                   </a>
-                  </li>
-                  <li>
-                    <a href="">
-                        3d controller
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-3">
-                <h5>
-                    Contact Us
-                </h5>
-                <p>
-                  nothing
-                </p>
-              </div>
-              <div class="col-md-3">
-           
-                <div class="subscribe_container">
-                  <h5>
-                      Newsletter
-                  </h5>
-                  <div class="form_container">
-                    <form action="">
-                      <input type="email" placeholder="Enter your email">
-                      <button type="submit">
-                        Subscribe
-                      </button>
-                    </form>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          <div class="container">
-              <div class="social_container">
-                 
-                  <div class="social-box">
-                    <a href="https://www.facebook.com/Thanh.Nhan.428204">
-                      <img src="images/fb.png" alt="">
-                    </a>
-      
-                    <a href="">
-                      <img src="images/twitter.png" alt="">
-                    </a>
-                    <a href="">
-                      <img src="images/linkedin.png" alt="">
-                    </a>
-                    <a href="">
-                      <img src="images/instagram.png" alt="">
-                    </a>
-                  </div>
-                </div>
-          </div>
-        </section>-->
-
-  <!-- footer section 
-  <section class="container-fluid footer_section">
-    <p>
-      Copyright &copy; 2019
-      <a href="https://html.design/"></a>
-    </p>
-  </section>
   
   footer section 
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>-->
+  <script type="text/javascript" src="js/bootstrap.js"></script>
   
-  <script>
-  const max_nodes = 10;
-  //Temperature
-  const ctx = document.getElementById('temperatureChart').getContext('2d');
-  const temperatureChart = new Chart(ctx, {
-    type :'line',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'temperature',
-        data: [0],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          display: true
-        },
-        y: {
-          display: true
-        }
-      }
-    }
-  });
-  //Humidity
-  const ctx1 = document.getElementById('humidityChart').getContext('2d');
-  const humidityChart = new Chart(ctx1, {
-    type :'line',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'humidity',
-        data: [0],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          display: true
-        },
-        y: {
-          display: true
-        }
-      }
-    }
-  });
-  //Gas
-  const ctx2 = document.getElementById('gasChart').getContext('2d');
-  const gasChart = new Chart(ctx2, {
-    type :'line',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'gas',
-        data: [0],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          display: true
-        },
-        y: {
-          display: true
-        }
-      }
-    }
-  });
-
-    /*socket.addEventListener('message', (event) => {
-    const datatest = {
-      "node":[
-        {
-          "teamperature":30, 
-          "humidity":30, 
-          "gas":10,
-          "error":0
-        },
-        {
-          "teamperature":30, 
-          "humidity":30, 
-          "gas":10,
-          "error":0
-        },
-        {
-          "teamperature":20, 
-          "humidity":10, 
-          "gas":20,
-          "error":0
-        }
-      ]   
-    }
-    //const jsonData = JSON.parse(event.data);
-    const jsonData = JSON.parse(datatest);
-    const node = jsonData.node;
-    const temperature = node[i].temperature;
-    const humidity = node[i].humidity;
-    const gas = node[i].gas;*/
-    mqttClient.on('message', (topic, message) => {
-    const jsonData = JSON.parse(message.toString());
-    const temperature = jsonData.temperature;
-    const humidity = jsonData.humidity;
-    const gas = jsonData.gas;
-
-    const time = new Date().toLocaleTimeString();
-    temperatureChart.data.labels.push(time);
-    temperatureChart.data.datasets[0].data.push(temperature);
-    if (temperatureChart.data.labels.length > max_nodes) {
-      temperatureChart.data.labels.shift();
-      temperatureChart.data.datasets[0].data.shift();
-    }
-    temperatureChart.update();
-    console.log(temperature);
-
-    humidityChart.data.labels.push(time);
-    humidityChart.data.datasets[0].data.push(humidity);
-    if (humidityChart.data.labels.length > max_nodes) {
-      humidityChart.data.labels.shift();
-      humidityChart.data.datasets[0].data.shift();
-    }
-    humidityChart.update();
-    console.log(humidity);
-
-    gasChart.data.labels.push(time);
-    gasChart.data.datasets[0].data.push(gas);
-    if (gasChart.data.labels.length > max_nodes) {
-      gasChart.data.labels.shift();
-      gasChart.data.datasets[0].data.shift();
-    }
-    gasChart.update();
-    console.log(gas);
-  })
-
-  </script>
+ 
 
 
 </body>
