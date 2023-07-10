@@ -1,13 +1,60 @@
-// socket.addEventListener('message', (event) => {
-//   const max_nodes = 10;
-//   const jsonData = JSON.parse(event.data);
-//   const temperature = jsonData.temperature;
-//   const humidity = jsonData.humidity;
-//   const gas = jsonData.gas;
-const max_nodes = 10;
-const time = new Date().toLocaleTimeString();
+const max_nodes = 20;
+
+const ctx = document.getElementById('temperatureChart').getContext('2d');
+const temperatureChart = createChart(ctx);
+
+const ctx1 = document.getElementById('humidityChart').getContext('2d');
+const humidityChart = createChart(ctx1);
+
+const ctx2 = document.getElementById('gasChart').getContext('2d');
+const gasChart = createChart(ctx2);
+
+function createChart(ctx) {
+  return new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [
+        {
+          label: 'Temperature',
+          data: [],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Humidity',
+          data: [],
+          backgroundColor: 'rgba(192, 75, 192, 0.2)',
+          borderColor: 'rgba(192, 75, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Gas',
+          data: [],
+          backgroundColor: 'rgba(192, 192, 75, 0.2)',
+          borderColor: 'rgba(192, 192, 75, 1)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: {
+          display: true
+        },
+        y: {
+          display: true
+        }
+      }
+    }
+  });
+}
 
 function updateChart(chart, value1, value2, value3) {
+  const time = new Date().toLocaleTimeString();
+
   chart.data.labels.push(time);
   chart.data.datasets[0].data.push(value1);
   console.log("temp: ", value1);
