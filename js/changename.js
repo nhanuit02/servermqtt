@@ -39,4 +39,5 @@ options.forEach((option) => {
     correspondingHeading.textContent = originalName; // Khôi phục tên của thẻ h3
     }
 });
+
 }

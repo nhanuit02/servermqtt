@@ -1,14 +1,5 @@
 
 
-
-
-    // function changename() {
-    //   const messageInput1 = document.getElementById('messageChangeName');
-    //   const message1 = messageInput1.value;
-    //   socket.send(message1);
-    //   messageInput1.value = '';
-    // }
-
     const socket = new WebSocket('ws://localhost:8000');
 
     // Dùng một đối tượng để lưu trữ các hàm xử lý dữ liệu từng topic
@@ -40,6 +31,12 @@
       console.log('WebSocket connection closed.');
     };
 
+    function sendMessage() {
+      const messageInput = document.getElementById('messageInput');
+      const message = messageInput.value;
+      socket.send(message);
+      messageInput.value = '';
+    }
     // Xử lý sự kiện nhận thông điệp từ máy chủ
     // socket.onmessage = function(event) {
     //   console.log('Received message (client):', event.data);
@@ -47,9 +44,10 @@
 
 
   /*
-  {
-  "temperature": 25,
-  "humidity": 60,
-  "gas": 10
-  }
+{
+        "temp": 26,
+        "hum":  69,
+        "gas":  26.300365447998047,
+        "error":        0
+}
 */
