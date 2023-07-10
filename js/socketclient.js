@@ -1,12 +1,6 @@
 
 
-    // Gửi chuỗi đến máy chủ khi nhấn nút "Send"
-    function sendMessage() {
-      const messageInput = document.getElementById('messageInput');
-      const message = messageInput.value;
-      socket.send(message);
-      messageInput.value = '';
-    }
+
 
     // function changename() {
     //   const messageInput1 = document.getElementById('messageChangeName');
@@ -16,53 +10,31 @@
     // }
 
     const socket = new WebSocket('ws://localhost:8000');
-    //const mqttClient = new mqttClient('mqtt://mqtt.flespi.io:1883');
+
+    // Dùng một đối tượng để lưu trữ các hàm xử lý dữ liệu từng topic
+    const topicHandlers = {
+      data1: sendfunction1,
+      data2: sendfunction2,
+      data3: sendfunction3
+    };
+    
     // Xử lý sự kiện khi kết nối được thiết lập
     socket.onopen = function(event) {
       console.log('Connected to server');
     };
+    
     socket.onmessage = function(event)  {
-      const data = JSON.parse(event.data);
-      const eventName = data.event;
-      const message = data.data;
-  
-      // Xử lý dữ liệu từ topic1
-      if (eventName === 'data1') {
-        // Xử lý dữ liệu từ topic1
-        var jsondataevent = JSON.parse(message);
-        var temperaturedata1 = jsondataevent.temp;
-        var humiditydata1 = jsondataevent.hum;
-        var gasdata1 = jsondataevent.gas;
-        console.log(temperaturedata1);
-        console.log(humiditydata1);
-        sendfunction1(temperaturedata1,humiditydata1,gasdata1);
-      }
-  
-      // Xử lý dữ liệu từ topic2
-      if (eventName === 'data2') {
-        // Xử lý dữ liệu từ topic2
-        const jsondataevent = JSON.parse(message);
-        const temperaturedata2 = jsondataevent.temp;
-        const humiditydata2 = jsondataevent.hum;
-        const gasdata2 = jsondataevent.gas;
-        console.log(temperaturedata2);
-        console.log(humiditydata2);
-        sendfunction2(temperaturedata2, humiditydata2, gasdata2);
-      }
-  
-      // Xử lý dữ liệu từ topic3
-      if (eventName === 'data3') {
-        // Xử lý dữ liệu từ topic3
-        const jsondataevent = JSON.parse(message);
-        const temperaturedata3 = jsondataevent.temp;
-        const humiditydata3 = jsondataevent.hum;
-        const gasdata3 = jsondataevent.gas;
-        console.log(temperaturedata3);
-        console.log(humiditydata3);
-        sendfunction3(temperaturedata3, humiditydata3, gasdata3);
+      const { event: eventName, data: message } = JSON.parse(event.data);
+      
+      // Xử lý dữ liệu từ các topic đã định nghĩa trong topicHandlers
+      if (eventName in topicHandlers) {
+        const { temp, hum, gas } = JSON.parse(message);
+        console.log(eventName);
+        console.log(temp);
+        topicHandlers[eventName](temp, hum, gas);
       }
     };
-  
+    
     // Khi kết nối bị đóng
     socket.onclose = () => {
       console.log('WebSocket connection closed.');
