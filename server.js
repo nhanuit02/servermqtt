@@ -19,7 +19,7 @@ const mqttClient = mqtt.connect('mqtt://mqtt.flespi.io:1883', {
 mqttClient.on('connect', () => {
   console.log('Connected to Flespi MQTT broker');
 
-  const topics = ['sensor/data1', 'sensor/data2', 'sensor/data3'];
+  const topics = ['/NODE_01/DATA/SENSOR', '/NODE_02/DATA/SENSOR', '/NODE_03/DATA/SENSOR'];
 
   topics.forEach(topic => {
     mqttClient.subscribe(topic, (err) => {
@@ -33,16 +33,30 @@ mqttClient.on('connect', () => {
 });
 
 mqttClient.on('message', (topic, message) => {
-  const data = message.toString();
-  console.log(topic,data);
-  broadcast(data);
+  if (topic === '/NODE_01/DATA/SENSOR') {
+    sendDataToClients('data1', message.toString());
+    console.log(message.toString());
+  } else if (topic === '/NODE_02/DATA/SENSOR') {
+    sendDataToClients('data2', message.toString());
+  } else if (topic === '/NODE_03/DATA/SENSOR') {
+    sendDataToClients('data3', message.toString());
+  }
 });
 
 wss.on('connection', (ws) => {
   clients.add(ws);
 
   ws.on('message', (message) => {
+    const topicpub = 'ADD/NEW_NODE_NAME'
     console.log('Received message:', message.toString());
+    broadcast(message.toString(), ws);
+    mqttClient.publish(topicpub, message, (err) => {
+      if (err) {
+        console.error('Error publishing message:', err);
+      } else {
+        console.log('Message published:', message.toString());
+      }
+    })
     // Xử lý các thông điệp nhận được từ WebSocket clients
   });
 
@@ -51,7 +65,17 @@ wss.on('connection', (ws) => {
   });
 });
 
-function broadcast(message) {
+function broadcast(message, sender) {
+  clients.forEach((client) => {
+    if (client !== sender && client.readyState === WebSocket.OPEN) {
+      client.send(message.toString());
+    }
+  });
+}
+
+function sendDataToClients(event, data) {
+  const message = JSON.stringify({ event, data });
+
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);

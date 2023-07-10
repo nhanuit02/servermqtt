@@ -27,8 +27,11 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
-  <script src="./js/socketclient.js"></script>"
+
+  <script src="./js/socketclient.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
 <body>
@@ -91,7 +94,7 @@
           <div class="col-md-6">
             <div class="about_detail-box">
               <h3 data-node="Node 1">
-                Temperature Chart
+                /NODE_01/DATA/SENSOR
               </h3>
             
               <canvas id="temperatureChart"height: 250px; width: 100%;></canvas>
@@ -123,7 +126,7 @@
           <div class="col-md-6">
             <div class="admission_detail-box">
               <h3 data-node="Node 2">
-                Humidity Chart
+                /NODE_02/DATA/SENSOR
               </h3>
 
               <canvas id="humidityChart"height: 250px; width: 100%;></canvas>
@@ -157,9 +160,9 @@
           <div class="col-md-6">
             <div class="why_detail-box">
               <h3 data-node="Node 3">
-                  Gas Chart
+                /NODE_03/DATA/SENSOR
               </h3>
-              <p>how to use?</p>
+              <p></p>
               <canvas id="gasChart"height: 250px; width: 100%;></canvas>
               <!--<div class="">
                 <a href="" class="call_to-btn btn_white-border">
@@ -199,55 +202,15 @@
                       Send New Name
                     </a>
                   </div>
+                </div>    
+                <script src="./js/changename.js"></script>
+                <div>
+                  <input type="text" id="messageInput" placeholder="Enter new node">
+                  <div class="">
+                    <a class="call_to-btn btn_white-border" onclick="sendMessage()">
+                      Add Node
+                    </a>
                 </div>
-                
-                <script>
-                  // Lấy danh sách các thẻ h3 trong tệp HTML
-                  const headings = document.querySelectorAll('h3');
-                  const select = document.getElementById('lang');
-                  const sendButton = document.getElementById('sendButton');
-                  const messageChangeName = document.getElementById('messageChangeName');
-                
-                  // Đặt nội dung của các option dựa trên nội dung của các thẻ h3
-                  headings.forEach((heading) => {
-                    const option = document.createElement('option');
-                    option.value = heading.textContent;
-                    console.log(option.value);
-                    option.textContent = heading.textContent;
-                    console.log(heading.textContent);
-                    select.appendChild(option);
-                  });
-
-
-                  // Hàm thay đổi tên của thẻ h3 đã chọn và cập nhật tên trong danh sách option
-                  function changeName() {
-                    const selectedOption = select.options[select.selectedIndex];
-                    const input = document.getElementById('messageChangeName');
-                    const newName = input.value;
-
-                    // Cập nhật tên của thẻ h3 đã chọn
-                    const selectedHeading = Array.from(headings).find((heading) => heading.textContent === selectedOption.value);
-                    if (selectedHeading) {
-                      selectedHeading.textContent = newName;
-                      selectedOption.textContent = newName; // Cập nhật tên trong danh sách option
-                    }
-                  }
-
-                  // Hàm khôi phục tên ban đầu của tất cả các tùy chọn
-                  function restoreOriginalNames() {
-                    const options = Array.from(select.options);
-                    options.forEach((option) => {
-                      const originalName = option.value;
-                      const correspondingHeading = Array.from(headings).find((heading) => heading.textContent === originalName);
-                      if (correspondingHeading) {
-                        option.textContent = originalName; // Khôi phục tên trong danh sách option
-                        correspondingHeading.textContent = originalName; // Khôi phục tên của thẻ h3
-                      }
-                    });
-                  }
-                </script>
-                    
-
             </div>
           </div>
           <div class="col-md-6">
@@ -342,44 +305,77 @@
 
 
   <script>
-  const ctx = document.getElementById('temperatureChart').getContext('2d');
-  const temperatureChart = new Chart(ctx, {
-    type :'line',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'temperature',
+const ctx = document.getElementById('temperatureChart').getContext('2d');
+const temperatureChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: 'Temperature',
         data: [0],
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        x: {
-          display: true
-        },
-        y: {
-          display: true
-        }
+      },
+      {
+        label: 'Humidity',
+        data: [1],
+        backgroundColor: 'rgba(192, 75, 192, 0.2)',
+        borderColor: 'rgba(192, 75, 192, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'Gas',
+        data: [2],
+        backgroundColor: 'rgba(192, 192, 75, 0.2)',
+        borderColor: 'rgba(192, 192, 75, 1)',
+        borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        display: true
+      },
+      y: {
+        display: true
       }
     }
-  });
+  }
+});
+
   //Humidity
   const ctx1 = document.getElementById('humidityChart').getContext('2d');
   const humidityChart = new Chart(ctx1, {
-    type :'line',
+    type: 'line',
     data: {
       labels: [],
-      datasets: [{
-        label: 'humidity',
-        data: [0],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
+      datasets: [
+        {
+          label: 'Temperature',
+          data: [0],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Humidity',
+          data: [1],
+          backgroundColor: 'rgba(192, 75, 192, 0.2)',
+          borderColor: 'rgba(192, 75, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Gas',
+          data: [2],
+          backgroundColor: 'rgba(192, 192, 75, 0.2)',
+          borderColor: 'rgba(192, 192, 75, 1)',
+          borderWidth: 1
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -396,16 +392,32 @@
   //Gas
   const ctx2 = document.getElementById('gasChart').getContext('2d');
   const gasChart = new Chart(ctx2, {
-    type :'line',
+    type: 'line',
     data: {
       labels: [],
-      datasets: [{
-        label: 'gas',
-        data: [0],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
+      datasets: [
+        {
+          label: 'Temperature',
+          data: [0],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Humidity',
+          data: [1],
+          backgroundColor: 'rgba(192, 75, 192, 0.2)',
+          borderColor: 'rgba(192, 75, 192, 1)',
+          borderWidth: 1
+        },
+        {
+          label: 'Gas',
+          data: [2],
+          backgroundColor: 'rgba(192, 192, 75, 0.2)',
+          borderColor: 'rgba(192, 192, 75, 1)',
+          borderWidth: 1
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -419,7 +431,9 @@
       }
     }
   });
+
   </script>
+  <script src="./js/chartupdate.js"></script>
 
 
   
