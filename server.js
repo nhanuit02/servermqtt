@@ -11,9 +11,8 @@ const clients = new Set();
 app.use(express.static('.'));
 
 const mqttClient = mqtt.connect('mqtt://mqtt.flespi.io:1883', {
-  username: 'eXUeRHMZWmaE7CqW9nj2Peio1iKtDrNFdyHS3jGNtGgq6wa6KjYpn5CdbcuCs87v', // Thay bằng tên người dùng của bạn
-  //password: 'YOUR_PASSWORD', // Thay bằng mật khẩu của bạn (nếu cần thiết)
-  clientId: 'nhanne' // Thay bằng client ID của bạn
+  username: 'eXUeRHMZWmaE7CqW9nj2Peio1iKtDrNFdyHS3jGNtGgq6wa6KjYpn5CdbcuCs87v', 
+  clientId: 'nhanne'
 });
 
 mqttClient.on('connect', () => {
@@ -57,7 +56,6 @@ wss.on('connection', (ws) => {
         console.log('Message published:', message.toString());
       }
     })
-    // Xử lý các thông điệp nhận được từ WebSocket clients
   });
 
   ws.on('close', () => {
